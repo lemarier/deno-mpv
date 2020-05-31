@@ -32,10 +32,15 @@ jobs:
           cargo --version
 
       - name: Cache cargo registry
+        if: matrix.os == 'windows-latest'
+        uses: numworks/setup-msys2@v1
+
+      - name: Cache cargo registry
         uses: actions/cache@v1
         with:
           path: ~/.cargo/registry
           key: ${{ runner.os }}-cargo-registry-${{ hashFiles('**/Cargo.lock') }}
+
       - name: Cache cargo index
         uses: actions/cache@v1
         with:
@@ -70,10 +75,19 @@ jobs:
         run: |
           brew install mpv
 
+      - name: Install mpv [windows]
+        if: matrix.os == 'macOS-latest'
+        run: |
+          choco install msys2
+          msys2do pacman -R --noconfirm --noprogressbar mingw-w64-i686-gcc-ada mingw-w64-i686-gcc-objc mingw-w64-x86_64-gcc-ada mingw-w64-x86_64-gcc-objc
+          msys2do pacman -Syyuu --noconfirm --noprogressbar --ask=20
+          msys2do pacman -Suu --noconfirm --noprogressbar --ask=20
+          msys2do pacman -S --noconfirm --noprogressbar --needed mingw-w64-x86_64-mpv mingw-w64-rust
+
       - name: Build
         env:
           RUST_BACKTRACE: 1
-        run: cargo build -vv --release --features build_libmpv
+        run: msys2do cargo build -vv --release --features build_libmpv
 
 
       - name: Release Plugin

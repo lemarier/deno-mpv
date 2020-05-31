@@ -78,9 +78,6 @@ jobs:
       - name: Install mpv [windows]
         if: matrix.os == 'windows-latest'
         run: |
-          msys2do pacman -R --noconfirm --noprogressbar mingw-w64-i686-gcc-ada mingw-w64-i686-gcc-objc mingw-w64-x86_64-gcc-ada mingw-w64-x86_64-gcc-objc
-          msys2do pacman -Syyuu --noconfirm --noprogressbar --ask=20
-          msys2do pacman -Suu --noconfirm --noprogressbar --ask=20
           msys2do pacman -S --noconfirm --noprogressbar --needed mingw-w64-x86_64-mpv mingw-w64-rust
 
       - name: Build

@@ -3,6 +3,7 @@ name = "deno_mpv"
 version = "0.0.1"
 authors = ["David Lemarier <david@lemarier.ca>"]
 edition = "2018"
+build = "build.rs"
 
 [lib]
 crate-type = ["cdylib"]

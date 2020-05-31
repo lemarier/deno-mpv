@@ -16,7 +16,9 @@ jobs:
 
     steps:
       - name: Clone repository
-        uses: actions/checkout@v1
+        uses: actions/checkout@v2
+        with:
+          submodules: true
 
       - name: Install rust
         uses: hecrj/setup-rust-action@v1
@@ -72,13 +74,12 @@ jobs:
         if: matrix.os == 'windows-latest'
         run: |
           choco install mpv
-          echo "::add-path::D:\a\deno-mpv\deno-mpv\vendors\mpv-dev-latest\"
-          echo $PATH
 
       - name: Build
         env:
           RUST_BACKTRACE: 1
-        run: cargo build --release
+          MPV_SOURCE: ${{ GITHUB_WORKSPACE }}/mpv-player
+        run: cargo build --release --features build_libmpv
 
       - name: Release Plugin
         uses: softprops/action-gh-release@master

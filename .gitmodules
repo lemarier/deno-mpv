@@ -1,0 +1,3 @@
+[submodule "mpv-player"]
+	path = mpv-player
+	url = https://github.com/mpv-player/mpv.git

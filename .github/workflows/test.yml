@@ -20,7 +20,7 @@ jobs:
         with:
           submodules: true
 
-      - name: Add msbuild to PATH
+      - name: Add msvc to PATH
         if: matrix.os == 'windows-latest'
         uses: ilammy/msvc-dev-cmd@v1
 
@@ -80,6 +80,8 @@ jobs:
         run: |
           cd MPV_SOURCE\64
           lib /def:mpv.def /name:mpv-1.dll /out:mpv.lib /MACHINE:X64
+          cd ..\32
+          lib /def:mpv.def /name:mpv-1.dll /out:mpv.lib /MACHINE:X86
 
       - name: Build
         env:

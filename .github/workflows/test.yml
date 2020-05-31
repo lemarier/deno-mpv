@@ -59,27 +59,35 @@ jobs:
           python-version: "2.7.x"
           architecture: x64
 
-      - name: Install mpv
+      - name: Install mpv [linux]
         if: matrix.os == 'ubuntu-latest'
         run: |
           sudo apt-get update
           sudo apt-get install mpv libmpv-dev
 
-      - name: Install mpv
+      - name: Install mpv [mac]
         if: matrix.os == 'macOS-latest'
         run: |
           brew install mpv
 
-      - name: Install mpv
+      - name: Install mpv [win]
         if: matrix.os == 'windows-latest'
         run: |
           choco install mpv
 
-      - name: Build
+      - name: Build [win]
+        if: matrix.os == 'windows-latest'
         env:
           RUST_BACKTRACE: 1
           MPV_SOURCE: ${{ env.GITHUB_WORKSPACE }}/mpv-player
         run: cargo build --release --features build_libmpv
+
+      - name: Build
+        if: matrix.os != 'windows-latest'
+        env:
+          RUST_BACKTRACE: 1
+        run: cargo build --release
+
 
       - name: Release Plugin
         uses: softprops/action-gh-release@master

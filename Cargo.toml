@@ -1,0 +1,22 @@
+[package]
+name = "deno_mpv"
+version = "0.0.1"
+authors = ["David Lemarier <david@lemarier.ca>"]
+edition = "2018"
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+deno_core = "0.45.0"
+conrod_core = "0.63.0"
+conrod_gfx = "0.63.0"
+gfx = { version = "0.17" }
+gfx_core = { version = "0.8" }
+gfx_window_glutin = "0.28"
+glutin = "0.19"
+winit = "0.18"
+mpv = "0.2.3"
+conrod_winit = "0.63.0"
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"

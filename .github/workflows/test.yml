@@ -76,7 +76,6 @@ jobs:
           echo $PATH
 
       - name: Build
-        if: matrix.os == 'windows-latest'
         env:
           RUST_BACKTRACE: 1
         run: cargo build --release

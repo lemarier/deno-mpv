@@ -71,6 +71,12 @@ jobs:
         run: |
           brew install mpv
 
+      - name: Linkin' lib [win]
+        if: matrix.os == 'windows-latest'
+        run: |
+          cd MPV_SOURCE\64
+          lib /def:mpv.def /name:mpv-1.dll /out:mpv.lib /MACHINE:X64
+
       - name: Build
         env:
           RUST_BACKTRACE: 1

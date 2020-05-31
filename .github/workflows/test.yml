@@ -78,7 +78,7 @@ jobs:
       - name: Build
         env:
           RUST_BACKTRACE: 1
-          MPV_SOURCE: ${{ GITHUB_WORKSPACE }}/mpv-player
+          MPV_SOURCE: ${{ env.GITHUB_WORKSPACE }}/mpv-player
         run: cargo build --release --features build_libmpv
 
       - name: Release Plugin

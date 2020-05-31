@@ -76,7 +76,7 @@ jobs:
           brew install mpv
 
       - name: Install mpv [windows]
-        if: matrix.os == 'macOS-latest'
+        if: matrix.os == 'windows-latest'
         run: |
           choco install msys2
           msys2do pacman -R --noconfirm --noprogressbar mingw-w64-i686-gcc-ada mingw-w64-i686-gcc-objc mingw-w64-x86_64-gcc-ada mingw-w64-x86_64-gcc-objc

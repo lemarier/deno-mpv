@@ -1,3 +1,5 @@
+cargo-features = ["edition"]
+
 [package]
 name = "deno_mpv"
 version = "0.0.1"

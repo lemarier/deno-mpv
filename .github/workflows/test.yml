@@ -78,7 +78,7 @@ jobs:
       - name: Install mpv [windows]
         if: matrix.os == 'windows-latest'
         run: |
-          msys2do pacman -S --noconfirm --noprogressbar --needed mingw-w64-x86_64-mpv mingw-w64-rust
+          msys2do pacman -S --noconfirm --noprogressbar --needed mingw-w64-x86_64-mpv mingw-w64-x86_64-rust
 
       - name: Build
         env:

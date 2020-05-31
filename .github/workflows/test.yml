@@ -79,7 +79,7 @@ jobs:
         if: matrix.os == 'windows-latest'
         env:
           RUST_BACKTRACE: 1
-          MPV_SOURCE: ${{ env.GITHUB_WORKSPACE }}
+          MPV_SOURCE: ${{ github.workspace }}
         run: cargo build --release --features build_libmpv
 
       - name: Build

@@ -72,8 +72,11 @@ jobs:
         if: matrix.os == 'windows-latest'
         run: |
           choco install mpv
+          echo "::add-path::D:\a\deno-mpv\deno-mpv\vendors\mpv-dev-latest\"
+          echo $PATH
 
-      - name: Build
+        - name: Build
+        if: matrix.os == 'windows-latest'
         env:
           RUST_BACKTRACE: 1
         run: cargo build --release

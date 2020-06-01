@@ -7,7 +7,7 @@ jobs:
     timeout-minutes: 60
     strategy:
       matrix:
-        os: [windows-latest]
+        os: [windows-latest, ubuntu-latest, macOs-latest]
 
     env:
       DENO_VERSION: 1.0.3

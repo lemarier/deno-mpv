@@ -15,15 +15,15 @@ fn main() {
 
     let archive_dir = Path::new(&src_dir).join("archive.zip");
     let mut archive_file = fs::File::create(archive_dir).unwrap();
-    let mut download_url = root_url + "/win32.zip";
+    let mut download_url = [root_url, "/win32.zip"].join("");
     let mut arch_type = "X86";
 
     if env::var("CARGO_CFG_TARGET_POINTER_WIDTH").unwrap() == "64" {
-        download_url = root_url + "/win32-x64.zip"
-        arch_type = "X64"
+        download_url = [root_url, "/win32-x64.zip"].join("");
+        arch_type = "X64";
     }
 
-    reqwest::get(download_url)
+    reqwest::get(&download_url)
         .unwrap()
         .copy_to(&mut archive_file);
 
@@ -36,13 +36,15 @@ fn main() {
         .output()
         .expect("failed to unzip archive");
 
+    out_dir = format!("{}/mpv_source", main_dir);
+
     // should be run only from GH_ACTIONS
     if env::var("DENO_BUILD_MODE").unwrap() == "release" {
         Command::new("lib")
-            .args("/def:mpv.def")
-            .args("/name:mpv-1.dll")
-            .args("/out:mpv.lib")
-            .args("/MACHINE:" + &arch_type)
+            .arg("/def:mpv.def")
+            .arg("/name:mpv-1.dll")
+            .arg("/out:mpv.lib")
+            .arg(["/MACHINE:", arch_type].join(""))
             .current_dir(&out_dir)
             .output()
             .expect("failed to build mpv.lib");

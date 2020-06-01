@@ -66,13 +66,6 @@ async function download(): Promise<string | null> {
         await Deno.run({
           cmd: [
             "dir",
-            localPath,
-          ],
-        }).status();
-
-        await Deno.run({
-          cmd: [
-            "dir",
             path.join(localPath, "win32"),
           ],
         }).status();

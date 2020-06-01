@@ -75,10 +75,7 @@ jobs:
           brew install mpv
 
       - name: Import libmpv
-        run: |
-          deno run --unstable -A ./scripts/libmpv.ts
-          dir mpv_source/win32
-          dir mpv_source/win32-x64
+        run: deno run --unstable -A ./scripts/libmpv.ts
 
       - name: Build
         env:

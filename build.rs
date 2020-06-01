@@ -30,14 +30,13 @@ fn main() {
     let mut main_dir = env::var("CARGO_MANIFEST_DIR").unwrap();
     let mut out_dir = format!("{}\\mpv_source", main_dir);
     let archive_file = format!("{}\\archive.zip", out_dir);
-    println!("cargo:rustc-link-search={}", archive_file);
 
     Command::new("7z")
         .args(&["x".to_string(), archive_file, "-o".to_string(), out_dir])
         .output()
         .expect("failed to unzip archive");
 
-    out_dir = format!("{}\\\\mpv_source", main_dir);
+    out_dir = format!("{}\\mpv_source", main_dir);
     println!("cargo:rustc-link-search={}", out_dir);
 }
 

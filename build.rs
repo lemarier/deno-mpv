@@ -32,10 +32,15 @@ fn main() {
     let archive_file = format!("{}\\archive.zip", out_dir);
 
     Command::new("7z")
-        .args(&["x".to_string(), archive_file, "-o".to_string(), out_dir])
+        .args(&[
+            "x".to_string(),
+            archive_file,
+            ["-o".to_string(), out_dir].join(""),
+        ])
         .output()
         .expect("failed to unzip archive");
 
+    out_dir = format!("{}\\mpv_source", main_dir);
     Command::new("dir")
         .args(&[out_dir])
         .output()

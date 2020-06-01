@@ -88,6 +88,11 @@ jobs:
           RUST_BACKTRACE: 1
         run: cargo build -vv --release --features build_libmpv
 
+      - name: Fix dylib [mac]
+        if: matrix.os == 'macOS-latest'
+        run: |
+          ./scripts/fix_dylib.sh
+
       - name: Release Plugin
         uses: softprops/action-gh-release@master
         env:

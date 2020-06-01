@@ -5,7 +5,7 @@ export async function download(localPath: string): Promise<string | null> {
   const md5 = new Hash("md5");
 
   const downloadUrl =
-    "https://github.com/lemarier/libmpv/releases/download/v0.0.8";
+    "https://github.com/lemarier/libmpv/releases/download/v0.0.9";
 
   const FILES_MAP: { [os in typeof Deno.build.os]: string | null } = {
     darwin: "mac.zip",

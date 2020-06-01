@@ -59,8 +59,6 @@ async function download(): Promise<string | null> {
             "e",
             localFile,
             `-o${localPath}`,
-            "*",
-            "-r",
             "-aoa",
           ],
         }).status();

@@ -27,8 +27,6 @@ fn main() {
 
     let mut main_dir = env::var("CARGO_MANIFEST_DIR").unwrap();
     let mut out_dir = format!("{}/mpv_source", main_dir);
-
-    out_dir = format!("{}/mpv_source", main_dir);
     let archive_file = format!("{}/archive.zip", out_dir);
 
     Command::new("7z")
@@ -36,10 +34,15 @@ fn main() {
         .output()
         .expect("failed to unzip archive");
 
+    if env::var("DENO_BUILD_MODE").unwrap() == "release" {
+        Command::new("lib /def:mpv.def /name:mpv-1.dll /out:mpv.lib /MACHINE:X64")
+            .current_dir(&out_dir)
+            .output()
+            .expect("failed to build mpv.lib");
+    }
+
     out_dir = format!("{}/mpv_source", main_dir);
     println!("cargo:rustc-link-search={}", out_dir);
-
-    println!("cargo:rustc-link-search={}", lib_path.display());
 }
 
 #[cfg(all(feature = "build_libmpv", target_os = "linux"))]

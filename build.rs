@@ -38,18 +38,6 @@ fn main() {
 
     out_dir = format!("{}/mpv_source", main_dir);
 
-    // should be run only from GH_ACTIONS
-    if env::var("DENO_BUILD_MODE").unwrap() == "release" {
-        Command::new("lib")
-            .arg("/def:mpv.def")
-            .arg("/name:mpv-1.dll")
-            .arg("/out:mpv.lib")
-            .arg(["/MACHINE:", arch_type].join(""))
-            .current_dir(&out_dir)
-            .output()
-            .expect("failed to build mpv.lib");
-    }
-
     out_dir = format!("{}/mpv_source", main_dir);
     println!("cargo:rustc-link-search={}", out_dir);
 }

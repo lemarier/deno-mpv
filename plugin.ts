@@ -1,7 +1,8 @@
-import { prepare, deferred } from "./deps.ts";
+import { deferred } from "./deps.ts";
+import { prepare } from "./utils/load_plugin.ts";
 
 export const PLUGIN_URL_BASE = Deno.env.get("DENO_MPV_PLUGIN_BASE") ||
-  "https://github.com/lemarier/deno-mpv/releases/download/0.0.1";
+  "https://github.com/lemarier/deno-mpv/releases/download/v0.0.2";
 const PLUGIN_URL = Deno.env.get("DENO_MPV_PLUGIN");
 const DEBUG = Boolean(Deno.env.get("DENO_MPV_DEBUG"));
 

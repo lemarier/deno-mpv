@@ -3,6 +3,8 @@ import { Hash, path, exists } from "../deps.ts";
 const os = Deno.build.os;
 const md5 = new Hash("md5");
 
+const localPath = Deno.args[0] || path.resolve("mpv_source");
+
 const downloadUrl =
   "https://github.com/lemarier/libmpv/releases/download/v0.0.8";
 
@@ -23,7 +25,6 @@ async function download(): Promise<string | null> {
   const remoteHash = md5.digestString(remoteUrl + remoteFile).hex();
 
   const cacheFileName = `${remoteHash}${remoteFile}`;
-  const localPath = path.resolve("mpv_source");
   const localFile = path.join(localPath, cacheFileName);
 
   await Deno.mkdir(localPath, { recursive: true });
@@ -60,6 +61,14 @@ async function download(): Promise<string | null> {
             `-o${localPath}`,
             "*",
             "-r",
+            "-aoa",
+          ],
+        }).status();
+
+        await Deno.run({
+          cmd: [
+            "dir",
+            localPath,
           ],
         }).status();
         break;

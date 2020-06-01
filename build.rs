@@ -36,6 +36,11 @@ fn main() {
         .output()
         .expect("failed to unzip archive");
 
+    Command::new("dir")
+        .args(&[out_dir])
+        .output()
+        .expect("failed to dir");
+
     out_dir = format!("{}\\mpv_source", main_dir);
     println!("cargo:rustc-link-search={}", out_dir);
 }

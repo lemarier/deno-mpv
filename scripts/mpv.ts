@@ -56,7 +56,7 @@ async function download(): Promise<string | null> {
         await Deno.run({
           cmd: [
             "7z",
-            "e",
+            "x",
             localFile,
             `-o${localPath}`,
             "-aoa",

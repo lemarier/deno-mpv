@@ -3,7 +3,6 @@ use std::fs;
 use std::io;
 use std::path::Path;
 use std::path::PathBuf;
-use tempfile::tempdir;
 
 #[cfg(all(feature = "build_libmpv", target_os = "windows"))]
 fn main() {
